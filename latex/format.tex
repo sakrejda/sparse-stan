@@ -1,0 +1,116 @@
+\chapter{Sparse matrix formats.}
+
+\section{Eigen's compressed (column) format.}
+
+Eigen stores sparse matrices in a compressed row or compressed column
+format.  Compressed column is the default and the following discussion
+focuses on the compressed column format.  The format is composed of
+four vectors, the following description is paraphrased from the Eigen
+tutorial (http://eigen.tuxfamily.org/dox/group__TutorialSparse.html) and
+follows the nomenclature from the tutorial.  In the compressed column
+format the outer dimension indices are the columns and inner indices are
+the rows.  In the compressed row format these are reversed.
+
+\begin{description}
+\item[Values, $w$] the values vector stores the non-zero entries from the sparse matrix, and
+typically contains some empty space to allow values to be efficiently
+inserted in the future.  We refer to the length of this vector as $p$.
+\item[InnerIndices, $v$] the inner indices vector is the same length as the
+values vector and indicates which matrix row the value is in. 
+\item[OuterStarts, $u$] the outer starts vector is equal in length to the
+number of columns of $X$ + 1.  The entry $u_j$ indicates where
+in $w$ the non-zero values (NZVs) for column $j$ begin.  The final entry
+indexes one-past the end of $w$ and $v$.
+\item[InnerNNZs, $z$] the number of entries in the inner number of non-zero values (NNZs) vector
+is equal to the number of columns of $X$.  Entry $z_j$ stores the count
+of non-zero values in column $X_{,j}$.
+\end{description}
+
+Since $w$ is padded to allow for fast inserts, it's always true that
+
+\begin{equation}
+p \geq NNZ
+\end{equation}
+
+For a sparse matrix the number of entries stored can be much smaller
+than a dense matrix:
+
+\begin{equation}
+2p + 2n + 1 \approx 2NNZ + 2n
+\end{equation}
+
+Iterating over this matrix requires $n +\sum z$ steps---at least in the
+way I can formulate, I have not looked up how Eigen does it.
+
+\section{R's compressed (column) format.}
+
+What R does is what R is, so we go by example:
+
+\begin{verbatim}
+>      (AA <- sparseMatrix(c(1,3:8), c(2,9,6:10), x = 7 * (1:7), dims = c(10,20)))
+10 x 20 sparse Matrix of class "dgCMatrix"
+                                                  
+ [1,] . 7 . . .  .  .  .  .  . . . . . . . . . . .
+ [2,] . . . . .  .  .  .  .  . . . . . . . . . . .
+ [3,] . . . . .  .  .  . 14  . . . . . . . . . . .
+ [4,] . . . . . 21  .  .  .  . . . . . . . . . . .
+ [5,] . . . . .  . 28  .  .  . . . . . . . . . . .
+ [6,] . . . . .  .  . 35  .  . . . . . . . . . . .
+ [7,] . . . . .  .  .  . 42  . . . . . . . . . . .
+ [8,] . . . . .  .  .  .  . 49 . . . . . . . . . .
+ [9,] . . . . .  .  .  .  .  . . . . . . . . . . .
+[10,] . . . . .  .  .  .  .  . . . . . . . . . . .
+> str(AA)
+Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
+  ..@ i       : int [1:7] 0 3 4 5 2 6 7
+  ..@ p       : int [1:21] 0 0 1 1 1 1 2 3 4 6 ...
+  ..@ Dim     : int [1:2] 10 20
+  ..@ Dimnames:List of 2
+  .. ..$ : NULL
+  .. ..$ : NULL
+  ..@ x       : num [1:7] 7 21 28 35 14 42 49
+  ..@ factors : list()
+> diff(AA@p)
+ [1] 0 1 0 0 0 1 1 1 2 1 0 0 0 0 0 0 0 0 0 0
+
+\end{verbatim}
+
+In R's format the slot $x$ matches the Eigen values vector, the slot $i$ matches 
+our inner indices vector (down to the zero-based indexing), the slot $p$ indicates 
+the index of $X_{i,j}$ in the slot $x$, which matches Eigen's outer starts vector,
+but the number of non-zero values per column must be calculated as \verb?dim(X@p)?.
+We implement a short R function to take an R sparse matrix and return a list matching the
+Eigen format:
+
+\begin{verbatim}
+
+\end{verbatim}
+
+\section{Stan-language compressed column format.}
+
+The current Stan language does not contain a sparse format so we instead
+store each sparse matrix as the four vectors of Eigen's compressed
+column (CC) format.  The data members required to delcare the sparse
+matrix $X$ would be as follows:
+
+\wrappingon
+\begin{verbatim}
+data {
+	int m;
+	int n;
+	int p;
+	vector[p] w;
+	vector[p] v;
+	vector[n+1] u;
+	vector[n] z
+}
+\end{verbatim}
+\wrappingoff
+
+Sparse matrix operations using this format are defined in the following
+sections.
+
+
+
+
+

@@ -1,0 +1,18 @@
+\chapter{Iterating over sparse matrix formats}
+
+\section{Compressed column format} 
+
+Iterating over a sparse matrix in CC format can be defined as follows.
+I have not checked into more efficient methods.  This method allows you
+to iterate with $i$ and $j$ in hand.
+
+\begin{verbatim}
+for j in 1 to n:
+  if z[j] != 0:
+    for q in u[j] to (u[j]+z[j]-1):
+      i = v[q];
+      xij = w[q];
+\end{verbatim}
+
+
+

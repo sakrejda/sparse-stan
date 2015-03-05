@@ -1,0 +1,82 @@
+\raggedbottom  % To avoid making LaTeX try to keep amount of
+               % text vertically on page constant:
+
+% To allow insertion of figures (jpeg, eps, etc..):
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+
+%\usepackage{ucs}        % Unicode (still needed?)
+%\usepackage[utf8x]{inputenc}   % Unicode (still needed?)
+\usepackage{cancel}                       % For cancelling equations
+\usepackage{helvet}
+\usepackage{booktabs}  % Pretty tables
+\usepackage{units} % The units package provides nice, non-stacked
+                   % fractions and better spacing for units.
+%\usepackage{multirow}   % Allows columns to span multiple
+                         % rows in {tabular} environment
+\usepackage{amssymb}
+\usepackage{amsmath} % To allow complex math symbols
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{lineno}
+\usepackage{listings}
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\usepackage{pdflscape}
+\usepackage{lipsum}
+
+\lstset{frame=tb,
+  language=S,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+\usepackage{tikz}
+\tikzstyle{ov}=[shape=rectangle,
+                 draw=black!80,
+                 minimum height=0.75cm,
+                 minimum width=1cm,
+                 thick]
+
+\tikzstyle{av}=[shape=rectangle,
+                 draw=black!80,
+                 fill=black!10,
+                 minimum height=1cm,
+                 minimum width=1cm,
+                 thick]
+
+\tikzstyle{lv}=[shape=circle,
+                  draw=black!80,
+                  thick,
+                  minimum width=1.5cm]
+
+
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+%\usepackage[greek,english]{babel}
+\usepackage[
+    backend=biber,
+    style=numeric,
+    natbib=true,
+    url=false
+]{biblatex}
+%\addbibresource{biblatex-examples.bib}
+\addbibresource{/home/krzysiek/phd-refs.bib}

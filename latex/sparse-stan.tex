@@ -1,0 +1,67 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start Preamble:
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[letterpaper,11pt,oneside,article]{memoir}
+
+\setstocksize{279.4mm}{215.9mm}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+%\settypeblocksize{279.4mm}{*}{.65}
+\setlrmarginsandblock{30mm}{30mm}{*}
+%\setlength{\marginparwidth}{65mm}
+\checkandfixthelayout
+
+% These work nicely together for a work with lots of margin notes:
+%\setlrmarginsandblock{30mm}{80mm}{*}
+%\setmarginnotes{5mm}{65mm}{5mm}
+
+\input{preamble.tex}
+
+\title{Sparse data structures for Stan.}
+\author{Krzysztof Sakrejda}
+\date{\today}  % if the \date{} command is left out, current date will be used
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End Preamble
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle % this prints the handout title, author, and date
+\input{abstract.tex}
+\clearpage
+\tableofcontents
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapters:
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{Spacing}{2}
+%\linenumbers
+
+% Appetizers:
+\linenumbers
+\input{notation.tex}
+\input{format.tex}
+\input{iteration.tex}
+\input{matrix-vector-multiplication.tex}
+
+% Cruft
+
+
+%\end{Spacing}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End of Document:
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\bibliographystyle{ecology}
+%\bibliography{/home/krzysiek/phd-refs}
+\printbibliography 
+
+\end{document}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
