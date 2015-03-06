@@ -16,6 +16,10 @@
 // each non-zero value in w, and then calculates how the associated non-zero  
 // value from w is scaled by the approriate entry of b to contribute to the
 // appropriate entry of the output column vector.
+//
+// The function works by incrementing the entries of the entries of the
+// output vector, y, because the outer loop is iterating column-wise
+// over X.
 
 
 vector sparse_multiply <- function(
