@@ -22,7 +22,7 @@
 // over X.
 
 
-vector sparse_multiply <- function(
+vector sparse_multiply(
 	int m, int n,
 	vector w, int[] v, int[] u, int[] z,
 	vector b
